@@ -138,16 +138,20 @@ def get_sellability_report(melons):
         print(f"{harvested_by} from {field_num} {status}")
 
 
+############
+# Further Study   #
+############
+
 def line_to_melon(line):
     line_list = line.split(" ")
-    all_melon_types = make_melon_types()
-    melons_by_id = make_melon_type_lookup(all_melon_types)
     #line_list[1]=shape value
     #line_list[3]=color value
     #line_list[5]=Type value
     #line_list[8]=haverster
     #line_list[11]=field value
 
+    all_melon_types = make_melon_types()
+    melons_by_id = make_melon_type_lookup(all_melon_types)
     melon_code = line_list[5]
     melon= Melon(melons_by_id[melon_code], line_list[1], line_list[3], line_list[11], line_list[8])
 
@@ -157,12 +161,13 @@ def line_to_melon(line):
     # return Melon(**melon_args)
 
 melon_dict = {}
-myfile = 'src/lab-exercise/oo-practice-melons/harvest_log.txt'
+myfile = '/home/hackbright/src/lab-exercise/oo-practice-melons/harvest_log.txt'
 with open(myfile, 'r') as f:
     for i, line in enumerate(f):
         melon_dict[i] = line_to_melon(line)
 
-
+# print(melon_dict[0].color_rating) looks good to me 
+# instead of with open(), I can do for line in open() 
 # for line in open(myfile, 'r').readlines():
 #     line_list = line.split()
   
