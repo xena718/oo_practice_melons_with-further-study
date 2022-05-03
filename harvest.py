@@ -137,18 +137,33 @@ def get_sellability_report(melons):
         status = "CAN BE SOLD" if melon.is_sellable() else "NOT SELLABLE"
         print(f"{harvested_by} from {field_num} {status}")
 
-for line in open('src/lab-exercise/oo-practice-melons/harvest_log.txt', 'r').readlines():
-    line_list = line.split()
+
+def line_to_melon(line):
+    line_list = line.split(" ")
+    all_melon_types = make_melon_types()
+    melons_by_id = make_melon_type_lookup(all_melon_types)
     #line_list[1]=shape value
     #line_list[3]=color value
     #line_list[5]=Type value
     #line_list[8]=haverster
     #line_list[11]=field value
-    all_melon_types = make_melon_types()
-    melons_by_id = make_melon_type_lookup(all_melon_types)
-    # self, melon_type, shape_rating, color_rating, field, harvester
 
-    code = line_list[5]
-    melon= Melon(melons_by_id["{code}"], line_list[1], line_list[3], line_list[11], "{line_list[8]}")
+    melon_code = line_list[5]
+    melon= Melon(melons_by_id[melon_code], line_list[1], line_list[3], line_list[11], line_list[8])
 
+    return melon
+
+    # melon_args = {}
+    # return Melon(**melon_args)
+
+melon_dict = {}
+myfile = 'src/lab-exercise/oo-practice-melons/harvest_log.txt'
+with open(myfile, 'r') as f:
+    for i, line in enumerate(f):
+        melon_dict[i] = line_to_melon(line)
+
+
+# for line in open(myfile, 'r').readlines():
+#     line_list = line.split()
+  
 
